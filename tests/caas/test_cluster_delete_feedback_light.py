@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import contextlib
 import subprocess
-from pathlib import Path
 
 from tests.catalog.conftest import unique_name
 from tests.core.grpc_client import GRPCClient
@@ -33,8 +32,8 @@ def test_cluster_delete_reports_deleting_state_without_provisioning(
     uuid = cli.create_cluster(
         name=name,
         template=cluster_template,
-        template_parameter_files={"pull_secret": pull_secret_path},
-        template_parameters={"ssh_public_key": Path(ssh_public_key_path).read_text().strip()},
+        pull_secret_file=pull_secret_path,
+        ssh_public_key_file=ssh_public_key_path,
     )
 
     try:
